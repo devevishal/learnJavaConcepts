@@ -1,0 +1,150 @@
+
+Java Lambda Expressions and Streams
+
+1. Introduction to Lambda Expressions
+
+Lambda expressions, introduced in Java 8, provide a clear and concise way to represent one method interface using an expression.
+They are very useful in implementing simple event listeners or callbacks, and are often used with collections and streams.
+
+Syntax:
+(parameters) -> expression
+or
+(parameters) -> { statements; }
+
+Examples:
+1. No Parameter
+Runnable r = () -> System.out.println("Hello, Lambda!");
+
+2. Single Parameter
+interface MyFunctionalInterface {
+    void myMethod(String s);
+}
+MyFunctionalInterface myFunc = (s) -> System.out.println(s);
+
+3. Multiple Parameters
+interface MyFunctionalInterface {
+    int add(int a, int b);
+}
+MyFunctionalInterface myFunc = (a, b) -> a + b;
+
+
+2. Functional Interfaces
+
+Java provides several built-in functional interfaces in the java.util.function package, such as Predicate, Function, Consumer, and Supplier.
+
+Examples:
+1. Predicate
+Predicate<String> isLongerThan5 = (str) -> str.length() > 5;
+
+2. Function
+Function<String, Integer> stringLength = (str) -> str.length();
+
+3. Consumer
+Consumer<String> printUpperCase = (str) -> System.out.println(str.toUpperCase());
+
+4. Supplier
+Supplier<String> supplier = () -> "Hello from Supplier!";
+
+
+3. Method References
+
+Method references provide a shorthand notation for lambda expressions to call a method. They are used to make the code more readable and concise.
+
+Types of Method References:
+1. Reference to a Static Method
+Function<Double, Double> sqrt = Math::sqrt;
+
+2. Reference to an Instance Method of a Particular Object
+String str = "hello";
+Supplier<String> toUpperCase = str::toUpperCase;
+
+3. Reference to an Instance Method of an Arbitrary Object of a Particular Type
+List<String> words = Arrays.asList("apple", "banana", "cherry");
+List<String> upperCaseWords = words.stream().map(String::toUpperCase).collect(Collectors.toList());
+
+4. Reference to a Constructor
+Function<String, StringBuilder> stringBuilderConstructor = StringBuilder::new;
+
+
+4. Introduction to Streams
+
+Streams, introduced in Java 8, provide a powerful way to perform operations on collections of objects in a functional style.
+Streams support operations such as filtering, mapping, and reducing, which can be combined to produce concise and readable code.
+
+Key Concepts:
+1. Stream Creation
+Streams can be created from collections, arrays, or I/O channels.
+
+2. Intermediate Operations
+These operations transform a stream into another stream. Examples include filter, map, and sorted.
+
+3. Terminal Operations
+These operations produce a result or a side-effect, such as collect, forEach, and reduce.
+
+4. Lazy Evaluation
+Intermediate operations are not executed until a terminal operation is invoked.
+
+Example of Stream Creation:
+List<String> list = Arrays.asList("a", "b", "c");
+Stream<String> stream = list.stream();
+
+Intermediate Operations Example:
+List<String> result = list.stream().filter(s -> s.startsWith("b")).collect(Collectors.toList());
+
+Terminal Operations Example:
+list.stream().forEach(System.out::println);
+
+
+5. Stream Examples
+
+Stream Examples:
+
+1. Filter:
+List<String> words = Arrays.asList("apple", "banana", "cherry", "date");
+List<String> result = words.stream()
+                           .filter(s -> s.startsWith("b"))
+                           .collect(Collectors.toList());
+System.out.println(result); // [banana]
+
+2. Map:
+List<String> words = Arrays.asList("a", "b", "c");
+List<String> result = words.stream()
+                           .map(String::toUpperCase)
+                           .collect(Collectors.toList());
+System.out.println(result); // [A, B, C]
+
+3. Sorted:
+List<String> words = Arrays.asList("banana", "apple", "cherry");
+List<String> result = words.stream()
+                           .sorted()
+                           .collect(Collectors.toList());
+System.out.println(result); // [apple, banana, cherry]
+
+4. Collect:
+List<String> words = Arrays.asList("a", "b", "c");
+List<String> result = words.stream()
+                           .collect(Collectors.toList());
+System.out.println(result); // [a, b, c]
+
+5. forEach:
+List<String> words = Arrays.asList("a", "b", "c");
+words.stream()
+     .forEach(System.out::println); // Prints: a b c
+
+6. Reduce:
+List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5);
+int sum = numbers.stream()
+                 .reduce(0, Integer::sum);
+System.out.println(sum); // 15
+
+7. Combining Intermediate Operations:
+List<String> words = Arrays.asList("apple", "banana", "cherry", "date", "blueberry");
+List<String> result = words.stream()
+                           .filter(s -> s.startsWith("b"))
+                           .map(String::toUpperCase)
+                           .sorted()
+                           .collect(Collectors.toList());
+System.out.println(result); // [BANANA, BLUEBERRY]
+
+
+

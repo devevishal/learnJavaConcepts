@@ -1,0 +1,39 @@
+
+Java 8 Features Summary:
+
+1. Lambda Expressions:
+   - Enable functional programming with anonymous functions.
+   - Example: list.forEach(item -> System.out.println(item));
+
+2. Stream API:
+   - Provides a functional approach to processing collections.
+   - Example: list.stream().filter(s -> s.startsWith("a")).forEach(System.out::println);
+
+3. Functional Interfaces:
+   - Interfaces with a single abstract method, used with lambda expressions.
+   - Example: @FunctionalInterface interface MyFunction { void execute(); }
+
+4. Default and Static Methods in Interfaces:
+   - Allow new methods to be added to interfaces without breaking existing implementations.
+   - Example: interface MyInterface { default void defaultMethod() { System.out.println("Default method"); } }
+
+5. New Date and Time API:
+   - Provides a comprehensive and flexible date and time handling.
+   - Example: LocalDate date = LocalDate.now();
+
+6. Optional Class:
+   - Avoids null pointer exceptions with a container object that may or may not contain a non-null value.
+   - Example: Optional<String> optional = Optional.of("Hello");
+
+7. Nashorn JavaScript Engine:
+   - Integrated JavaScript engine allowing execution of JavaScript code within the JVM.
+   - Example: ScriptEngine engine = new ScriptEngineManager().getEngineByName("nashorn");
+
+8. Base64 Encoding and Decoding:
+   - Utility class for encoding and decoding Base64.
+   - Example: String encoded = Base64.getEncoder().encodeToString("Hello".getBytes());
+
+9. Other Enhancements:
+   - Improved type inference, annotations on Java types, and parallel array sorting.
+
+These features significantly enhance Java's capabilities, making it more expressive, readable, and efficient for modern programming needs.

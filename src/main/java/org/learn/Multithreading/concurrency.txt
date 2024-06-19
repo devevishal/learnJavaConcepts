@@ -1,0 +1,158 @@
+
+
+
+Process and Thread 
+--------------------
+
+CPU does not run process , it runs thread. 
+
+
+
+Program that is running is process. Progcess is storing execution details. Thread is one which actually takes memory when it executes.
+
+
+Thread is unit of cpu execution. part of code of a process that is given to cpu to run. 
+
+
+
+Concurrency and parallelism
+
+---------------------------
+
+Concurrency : at one point of time how task are at different stage of execution.  In a current system where system can switch to task even before it switches previous task is completted. 
+
+parallelism : System where multiple task is making progress at the same time. 
+
+
+context switching 
+
+------------------
+
+switching between one task to another for execution. Process takes care of switch by having PCB. 
+
+
+There is one issue in context switching. When you come back to task you gave recollect where you had left earlier to get back to same productivity. 
+
+
+when to we switch back to task , we have spend time in 
+
+1. saving state of current task 
+2. recollecting next task. 
+
+This is not productive use case of CPU. Should be be not that context switching.  
+
+
+
+ThreadPools:- 
+
+if there would be 1000 thread then its inefficient use of multitgrething thats why we create pools 
+
+instead of creating thread for every request they make use of thread pool which which basically limit no of thread used. 
+
+In thread pool there is queue in which thread waits to be executed , and no of thread limit which can be used to execute it. 
+
+ExecuterService e Executors.fixedThreadPool(10) // example 
+e.executeTask
+
+
+Runnable and callables 
+-----------------
+
+when we do not want task to return we use Runnable, but if we need results we use callables. 
+
+
+Multithreding issue 
+------------------------
+
+Same data when shared among multiple thread, there is chances that data will be modified and syching issues comes. 
+
+
+where does syc problem happens ?
+-----------------------------
+
+
+Critical section : a part of code of task that is going to work (read/modify) on shared piece of data.  {part of code which is reading or modifying shared data}
+
+Race condition: when more than 1 thread enters into critical section.  
+
+
+Definition: Preemption refers to the ability of an operating system to interrupt and temporarily suspend a currently running task, replacing it with another task. This is essential for multitasking but introduces complexities in managing shared resources.
+
+Example: If a thread is preempted while updating a shared variable, another thread might be scheduled and start modifying the same variable, leading to inconsistencies.
+
+
+so syc issue happen when 
+
+1. critical section    a
+2. Race condition 
+3. preemtiness 
+
+syc problem only happend if all 3 condition is met. 
+
+
+if we solve any one issue problem is solved. 
+
+
+Properties of a good solution to sync problem
+---------------------------------------------
+
+1. Mutual exclusion : 
+	-only 1 thread is allowed to enter cs at the same time 
+	-No race condition 
+2. The overall system should make progress. Means its should not happen that one thread blocked entire execution just because its waiting. Atleast some part of code should be running. 
+
+3. Boundary waiting :  
+    -No thread should have to wait infinitely 
+    -There should be well defined boundary on after how many other task will your task allowed to resume. 
+
+4. No Busy waiting :- Busy waiting is when a cpu is still spending its resources to check if the paused task can seen
+
+
+
+Solution to syc problem 
+
+
+Mutex : allow exclusive access to CS only 1 thread at a time. 
+
+properies of Mutex
+
+1. only one thread can unlock 
+2. Other will have to wait. (Non busy waiting). busy cpu make them sleep. 
+3. Boundary waiting
+
+
+Sychronisation :
+--------------
+
+we can use this keyword with method or block so only 1 thread at a time. 
+
+
+
+
+Semaphore : 
+
+
+allow only limited number of thread to enter the cs section. it smilar to mutex but limited no of thread. used to maintain connection pool. 
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
